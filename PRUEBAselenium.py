@@ -40,9 +40,9 @@ class prueba_selenium(unittest.TestCase):
         title = self.driver.title
 
         self.assertEqual("Wikipe, la enciclopedia libre", title)
-        pass
+        
 
     def tearDown(self):
         print("me ejecuto después de cada test")
         self.driver.quit()
-        pass
+        
