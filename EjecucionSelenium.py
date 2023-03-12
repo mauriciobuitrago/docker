@@ -11,9 +11,10 @@ class prueba_selenium(unittest.TestCase):
     def setUp(self):
         print("me ejecuto antes de cada test")
     
-        self.driver = webdriver.Remote(command_executor="http://selenoid:4444/wd/hub/session -d",
+        self.driver = webdriver.Remote(command_executor="http://selenoid:4444/wd/hub",
                                        desired_capabilities={'browserName': 'chrome',
-                                                             'browserVersion': '89.0', 'selenoid:options': {'enableVNC': True}})
+                                                             'browserVersion': '89.0', 'selenoid:options': {'enableVideo': True}})
+
 
     def test_a(self):
         print("me ejecuto en cada test A")
@@ -23,7 +24,7 @@ class prueba_selenium(unittest.TestCase):
         time.sleep(5)
         # aceptamos cookies
         self.driver.find_element(
-            By.XPATH, "//div[text()='Acepto']/ancestor::button").click()
+            By.XPATH, "//div[text()='Acepto']/-ancestor::button").click()
         time.sleep(5)
         # buscamos texto wikipedia
         search_bar = self.driver.find_element(By.NAME, "q")
@@ -34,7 +35,7 @@ class prueba_selenium(unittest.TestCase):
 
         # BUSQUEDA DE GOOGLE
         self.driver.find_element(
-            By.XPATH, "(//div[@id='search']/descendant::div[@class='g'])[1]/descendant::a[1]").click()
+            By.XPATH, "(//div[@id='search']/descendant::div[@class='g'])[1]/-descendant::a[1]").click()
 
         # WIKIPEDIA
         title = self.driver.title
