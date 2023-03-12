@@ -1,0 +1,30 @@
+version: "3.3"
+
+volumes:
+    jenkins_home:
+        external: 
+            name: jenkins_home               
+services:
+        jenkins:
+                build: ./jenkins_dockerfile/
+                network_mode: bridge
+                links:
+                - selenoid
+                volumes:
+                - "jenkins_home:/var/jenkins_home"
+                ports: ["9000:8080","50000:50000"]
+        selenoid: 
+                image: "aerokube/selenoid:latest-release"
+                network_mode: bridge
+                volumes:
+                - "/var/run/docker.sock:/var/run/docker.sock"
+                - "./config/:/etc/selenoid/:ro"
+                ports: ["4444:4444"]
+        selenoid-ui:
+                    image: "aerokube/selenoid-ui"
+                    network_mode: bridge
+                    links:
+                     - selenoid
+                    ports: ["8080:8080"]
+                    command: ["--selenoid-uri", "http://selenoid:4444"]
+                                    
