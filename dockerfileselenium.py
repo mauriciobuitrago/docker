@@ -5,15 +5,15 @@ capabilities = {
     "browserName": "chrome",
     "browserVersion": "89.0",
     "selenoid:options": {
-        "enableVideo": False
+        "enableVideo": True
     }
 }
 
 driver = webdriver.Remote(
-    command_executor="http://localhost:4444/wd/hub",
+    command_executor="http://selenoid:4444/wd/hub",
     desired_capabilities=capabilities)
 
-driver.get("https://www.w3schools.com/html/default.asp")
+driver.get("https://www.google.com")
 time.sleep(5)
 all_cookies = driver.get_cookies()
 print(all_cookies)
