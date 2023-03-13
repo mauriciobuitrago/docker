@@ -5,7 +5,7 @@ capabilities = {
     "browserName": "chrome",
     "browserVersion": "89.0",
     "selenoid:options": {
-        "enableVideo": True
+        "enableVNC": True
     }
 }
 
